@@ -1,58 +1,52 @@
-import DatailPage from "../components/templates/DetailsPage"
+import DatailPage from "../components/templates/DetailsPage";
 
-function Details({data}) {
-
-    return (
+function Details({ data }) {
+  return (
     <div>
-        <DatailPage {...data} />
+      <DatailPage {...data} />
     </div>
-  )
+  );
 }
 
-export default Details
+export default Details;
 
+export async function getStaticPaths() {
+  const res = await fetch("https://my-api-fawn.vercel.app/data");
+  const json = await res.json();
 
-export async function getStaticPaths (){
-    const res = await fetch("http://localhost:4000/data")
-    const json = await res.json()
+  const showsData = json.slice(0, 10);
+  const paths = showsData.map((item) => ({
+    params: { id: item.id.toString() },
+  }));
 
-    const showsData = json.slice(0 , 10)
-    const paths = showsData.map((item)=> ({
-        params : {id : item.id.toString()}
-    })) 
-
-    return {
-        paths ,
-        fallback : true , 
-    }
+  return {
+    paths,
+    fallback: true,
+  };
 }
 
-export async function getStaticProps (context){
+export async function getStaticProps(context) {
+  const res = await fetch(
+    `https://my-api-fawn.vercel.app/data/${context.params.id}`
+  );
 
-  
+  const data = await res.json();
 
-
-    const res = await fetch(`http://localhost:4000/data/${context.params.id}`);
- 
-    const data = await res.json();
-
-    if (!context.params.id) {
-        return {
-            notFound: true,
-        };
-    }
-
-    if(!data.id){
-        console.log("not found")
-    }
- 
+  if (!context.params.id) {
     return {
-        props : {
-            data
-        } , 
+      notFound: true,
+    };
+  }
 
-        notFound : false
+  if (!data.id) {
+    console.log("not found");
+  }
 
-    }
+  return {
+    props: {
+      data,
+    },
 
+    notFound: false,
+  };
 }

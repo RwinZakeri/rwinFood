@@ -1,26 +1,24 @@
-import MenuPage from "../components/templates/menuPage"
+import MenuPage from "../components/templates/menuPage";
 
-function Menu({data}) {
+function Menu({ data }) {
   return (
     <div>
       <MenuPage data={data} />
     </div>
-  )
+  );
 }
 
-export default Menu
+export default Menu;
 
+export async function getStaticProps() {
+  const Response = await fetch("https://my-api-fawn.vercel.app/data");
+  const data = await Response.json();
 
+  return {
+    props: {
+      data,
+    },
 
-export async function getStaticProps(){
-    const Response = await fetch("http://localhost:4000/data");
-    const data = await Response.json();
-
-    return {
-        props : {
-            data
-        } , 
-
-        revalidate : 10 ,  
-    }
+    revalidate: 10,
+  };
 }
