@@ -1,3 +1,8 @@
+import Link from "next/link";
+import Dollar from "../icons/Dollar";
+import Location from "../icons/Location";
+import styles from "./Card.module.css";
+
 function Card(props) {
   const { id, name, price, details = [], discount } = props;
 
