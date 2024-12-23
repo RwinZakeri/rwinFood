@@ -8,7 +8,7 @@ function Card(props) {
         <h4>{name}</h4>
         <div>
           <Location />
-          {details?.[0]?.Cuisine || 'No cuisine information available'}
+          {details?.[0]?.Cuisine || "No cuisine information available"}
         </div>
       </div>
       <div className={styles.price}>
@@ -26,3 +26,4 @@ function Card(props) {
     </div>
   );
 }
+export default Card;
