@@ -1,10 +1,5 @@
-import Link from "next/link";
-import styles from "./Card.module.css";
-import Location from "../icons/Location";
-import Dollar from "../icons/Dollar";
-
 function Card(props) {
-  const { id, name, price, details, discount } = props;
+  const { id, name, price, details = [], discount } = props;
 
   return (
     <div className={styles.container}>
@@ -13,7 +8,7 @@ function Card(props) {
         <h4>{name}</h4>
         <div>
           <Location />
-          {details[0].Cuisine}
+          {details?.[0]?.Cuisine || 'No cuisine information available'}
         </div>
       </div>
       <div className={styles.price}>
@@ -31,5 +26,3 @@ function Card(props) {
     </div>
   );
 }
-
-export default Card;

@@ -1,6 +1,5 @@
-import Categories from "../components/templates/categoriesPage copy";
+import Categories from "../components/templates/categoriesPage";
 function CategoriesPage({ data }) {
-  console.log(data);
   return (
     <>
       <Categories data={data} />
